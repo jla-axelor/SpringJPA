@@ -2,6 +2,7 @@ package com.example.db;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,10 +17,13 @@ public class Teacher {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
+	@Column(unique = true)
 	private String userName;
-	private int gender;
+	private String gender;
 	private int age;
+	@Column(unique = true)
 	private String email;
+	private String password;
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "teacher")
 	private List<Student> studentList;
 	
@@ -39,10 +43,10 @@ public class Teacher {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public int getAge() {
@@ -54,8 +58,15 @@ public class Teacher {
 	public String getEmail() {
 		return email;
 	}
+	public String getPassword() {
+		return password;
+	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<Student> getStudentList() {

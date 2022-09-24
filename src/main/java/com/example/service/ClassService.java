@@ -1,7 +1,6 @@
 package com.example.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,13 @@ public class ClassService {
 		teacherRepo.save(teacher);
 	}
 	
-	public void addStudent(Student student) {
+	public Teacher getTeacherById(Long tid) {
+		return teacherRepo.findById(tid).get();
+	}
+	
+	public void addStudent(Student student,Long tid) {
+		Teacher t = teacherRepo.findById(tid).get();
+		student.setTeacher(t);
 		studentRepo.save(student);
 	}
 	
@@ -31,7 +36,25 @@ public class ClassService {
 		return studentRepo.findById(sid).get();
 	}
 	
-	public List<Student> getAllStudent(){
-		return (List<Student>)studentRepo.findAll();
+	public List<Student> getAllStudentByTeacher(Long tid){
+		return studentRepo.findByTeacherId(tid);
+	}
+	
+	public boolean checkStudent(int rollNumber) {
+		Student s = studentRepo.findByRollNumber(rollNumber);
+		if(s != null) return true;
+		else return false;
+	}
+	
+	public void updateStudent(Student student) {
+		studentRepo.save(student);
+	}
+	
+	public Teacher findTeacher(String userName,String password) {
+		return teacherRepo.findByUserNameAndPassword(userName,password);
+	}
+	
+	public void deleteStudent(Long sid) {
+		studentRepo.deleteById(sid);
 	}
 }

@@ -17,7 +17,7 @@ public class Student {
 	private int rollNumber;
 	private String department;
 	private int standerd;
-	private int gender;
+	private String gender;
 	private int age;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -51,10 +51,10 @@ public class Student {
 	public void setStanderd(int standerd) {
 		this.standerd = standerd;
 	}
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public int getAge() {
@@ -63,7 +63,14 @@ public class Student {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 	
 	
 }
